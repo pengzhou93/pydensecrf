@@ -3,6 +3,7 @@ Adapted from the inference.py to demonstate the usage of the util functions.
 """
 
 import sys
+sys.path.insert(0,'..')
 import numpy as np
 import pydensecrf.densecrf as dcrf
 

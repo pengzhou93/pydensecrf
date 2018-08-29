@@ -62,6 +62,29 @@ then
         jupyter notebook --browser google-chrome
     fi
 
+elif [ "$1" = "examples/inference.py" ]
+then
+
+    debug=$2
+    if [ $debug = debug ]
+    then
+    # ./run.sh "examples/inference.py" debug build
+        if [ $3 = build ]
+        then
+            python setup.py build_ext --inplace
+        fi
+        cd examples
+        file="inference.py"
+        line=4
+        insert_debug_string "$file" $line "$debug_str" $debug
+        python "$file" im2.png anno2.png test.png
+        delete_debug_string "$file" $line "$debug_str"
+
+    else
+        cd examples
+        python inference.py im2.png anno2.png test.png
+    fi
+
 else
     echo NoParameter
 fi
